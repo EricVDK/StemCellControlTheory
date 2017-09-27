@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c158dd6ce108177478ef6dd88f2a7c5e
+timeCreated: 1502043779
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tacCell: {fileID: 1373313361241098, guid: d1673eeca2b3d254a8869a7254861c55, type: 2}
+  - container: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 965d24fd963935848bc000c695cc5d06
+timeCreated: 1502043073
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - cell: {fileID: 1373313361241098, guid: d1673eeca2b3d254a8869a7254861c55, type: 2}
+  - container: {instanceID: 0}
+  - stemSphere: {fileID: 1627230233050516, guid: af3deed285320f4429408d4c274571b8,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
