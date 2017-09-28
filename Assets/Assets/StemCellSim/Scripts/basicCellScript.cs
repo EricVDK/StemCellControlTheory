@@ -14,7 +14,7 @@ public abstract class basicCellScript: MonoBehaviour{
 	public float collisionCount;
 
 	public void clampVelocity(Rigidbody rb){
-		if (rb.velocity.magnitude > maxVelocity) {
+		if (rb.velocity.magnitude > 5) {
 			rb.velocity = rb.velocity.normalized * maxVelocity;
 		}
 	}

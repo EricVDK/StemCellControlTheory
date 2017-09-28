@@ -41,6 +41,7 @@ public class managerScript : MonoBehaviour {
 	public Slider removalSlider;
 	public Slider maturationSlider;
 	public Slider sensitivitySlider;
+	public Slider creationSlider;
 
 	public Text recoveryText;
 	// Use this for initialization
@@ -61,6 +62,7 @@ public class managerScript : MonoBehaviour {
 		disasterRemove = removalSlider.value;
 		ageDelay = maturationSlider.value;
 		max = sensitivitySlider.value;
+		creationRate = 1 / creationSlider.value;
 
 
 		checkAge ();
@@ -224,8 +226,9 @@ public class managerScript : MonoBehaviour {
 		isTiming = true;
 		timer = 0f;
 		targetNumber = DCList.Count;
+		float removePercent = DCList.Count * (disasterRemove / 100f);
 
-		for (int i = 0; i < disasterRemove; i++) {
+		for (int i = 0; i < removePercent; i++) {
 			if (DCList.Count > 0) {
 				int rand = UnityEngine.Random.Range (0, DCList.Count);
 				GameObject droplet = DCList [rand];

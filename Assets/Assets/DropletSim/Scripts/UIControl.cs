@@ -23,7 +23,7 @@ public class UIControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		removalText.text = "Amount of Cells to Remove: " + removalSlider.value.ToString();
+		removalText.text = "Percent of Current Cells to Remove: " + removalSlider.value.ToString("#.");
 		maturingText.text = "Maturation Delay (seconds): " + maturingSlider.value.ToString("#.0");
 		sensitivityText.text = "Apoptosis Threshold (collisions/second): " + sensitivitySlider.value.ToString("#.00");
 
