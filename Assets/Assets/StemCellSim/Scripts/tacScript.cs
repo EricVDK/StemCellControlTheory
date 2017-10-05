@@ -53,14 +53,16 @@ public class tacScript : basicCellScript {
 
 	void OnCollisionEnter(Collision col){
 		Debug.Log (col.gameObject.tag);
+		if (isDifferentiated) {
+			if (col.gameObject.tag == "tac") {
+			
+				collisionCount++;
+				Debug.Log ("collide");
 
-		if (col.gameObject.tag == "tac") {
-			collisionCount++;
-			Debug.Log ("collide");
 
-
+			}
 		}
-
+		
 
 
 	}
