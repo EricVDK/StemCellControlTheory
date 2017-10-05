@@ -75,7 +75,7 @@ public class managerScript : MonoBehaviour {
 
 		timerUpdate ();
 		recoveryText.text = "Time to Recover (seconds): " + timer.ToString();
-		//passiveRemoval ();
+		passiveRemoval ();
 		//updateApoptosisRate ();
 		//apoptosis ();
 
@@ -110,17 +110,17 @@ public class managerScript : MonoBehaviour {
 	void passiveRemoval(){
 		removalTimer += Time.deltaTime;
 
-		if (removalTimer > removalRate && DCList.Count > 0) {
+		if (DCList.Count > 35) {
 			
 			removalTimer = 0;
 			int r = Random.Range (0,DCList.Count);
 			GameObject c = DCList [r];
 			DCList.RemoveAt (r);
-			c.GetComponent<SphereCollider> ().isTrigger = true;
-			c.GetComponent<tacScript> ().isLeaving = true;
-			c.GetComponent<Rigidbody> ().velocity = new Vector3 (0f, 5f, 0f);
-			//Destroy (c);
-			Debug.Log (DCList.Count);
+
+			ParticleSystem ps = Instantiate (apoptosisEffect);
+			ps.transform.position = c.transform.position;
+			Destroy (c);
+
 
 		}
 	}
