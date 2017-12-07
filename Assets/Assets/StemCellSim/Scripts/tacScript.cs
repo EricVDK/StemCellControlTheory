@@ -10,6 +10,7 @@ public class tacScript : basicCellScript {
 
 	public bool isDifferentiated = false;
 	public bool isLeaving = false;
+	public bool escaped = false;
 	float timer = 0f;
 	float delay;
 	public float contactTimer;
@@ -38,9 +39,9 @@ public class tacScript : basicCellScript {
 		
 		
 		if (!isLeaving) {
-
-			rb.AddForce (Random.insideUnitSphere*0.15f,ForceMode.Impulse);
-			rb.AddForce (new Vector3 (0f, 0.2f, 0f), ForceMode.Impulse);
+			
+			//rb.AddForce (Random.insideUnitSphere*0.15f,ForceMode.Impulse);
+			//rb.AddForce (new Vector3 (0f, 0.2f, 0f), ForceMode.Impulse);
 			clampVelocity (rb);
 		}
 		if (!isDifferentiated) {
@@ -53,7 +54,7 @@ public class tacScript : basicCellScript {
 
 	void OnCollisionEnter(Collision col){
 		
-		if (isDifferentiated) {
+		if (isDifferentiated || !isDifferentiated) {
 			if (col.gameObject.tag == "tac") {
 			
 				collisionCount++;
@@ -65,6 +66,13 @@ public class tacScript : basicCellScript {
 		
 
 
+	}
+
+	void OnTriggerExit(Collider col){
+		if (col.gameObject.tag == "outer") {
+			Debug.Log ("I escaped :D");
+			escaped = true;
+		}
 	}
 
 

@@ -8,12 +8,13 @@ public class UIControl : MonoBehaviour {
 	public Slider removalSlider;
 	public Slider maturingSlider;
 	public Slider sensitivitySlider;
+	public Slider creationSlider;
 
 	public Text removalText;
 	public Text maturingText;
 	public Text sensitivityText;
+	public Text creationText;
 
-//	public Text diff;
 
 	public GameObject manager;
 	// Use this for initialization
@@ -26,7 +27,7 @@ public class UIControl : MonoBehaviour {
 		removalText.text = "Percent of Current Cells to Remove: " + removalSlider.value.ToString("#.");
 		maturingText.text = "Maturation Delay (seconds): " + maturingSlider.value.ToString("#.0");
 		sensitivityText.text = "Apoptosis Threshold (collisions/second): " + sensitivitySlider.value.ToString("#.00");
-
+		creationText.text = "Creation Rate (cells/second): " + ((creationSlider.value)).ToString ("#.00");
 	//	diff.text = (manager.GetComponent<managerScriptFeedback> ().timer - manager.GetComponent<ManagerScriptStatic> ().timer).ToString ();
 	}
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Text;
+using System.IO;
 public class managerScript : MonoBehaviour {
 	// why type of sim is it managing?
 	public bool apoptosisSim;
@@ -15,6 +16,7 @@ public class managerScript : MonoBehaviour {
 	public float removalRate;
 	public float maxStorage;
 	public float targetNumber;
+	public float recoveryNumber;
 	public float disasterRemove;
 
 	public float max;
@@ -75,7 +77,7 @@ public class managerScript : MonoBehaviour {
 
 		timerUpdate ();
 		recoveryText.text = "Time to Recover (seconds): " + timer.ToString();
-		passiveRemoval ();
+		//passiveRemoval ();
 		//updateApoptosisRate ();
 		//apoptosis ();
 
@@ -110,7 +112,7 @@ public class managerScript : MonoBehaviour {
 	void passiveRemoval(){
 		removalTimer += Time.deltaTime;
 
-		if (DCList.Count > 35) {
+		if (DCList.Count > 30) {
 			
 			removalTimer = 0;
 			int r = Random.Range (0,DCList.Count);
@@ -169,7 +171,7 @@ public class managerScript : MonoBehaviour {
 	void collisionBasedRemoval(){
 		//destroy cells above limit
 		for (int i = 0; i < tacList.Count; i++) {
-			if (tacList [i].GetComponent<tacScript> ().collisionCount > max) {
+			if (tacList [i].GetComponent<tacScript> ().collisionCount > max || tacList [i].GetComponent<tacScript>().escaped) {
 				GameObject cell = tacList [i];
 				tacList.RemoveAt (i);
 				ParticleSystem ps = Instantiate (apoptosisEffect);
@@ -179,7 +181,7 @@ public class managerScript : MonoBehaviour {
 		}
 
 		for (int i = 0; i < DCList.Count; i++) {
-			if (DCList [i].GetComponent<tacScript> ().collisionCount > max) {
+			if (DCList [i].GetComponent<tacScript> ().collisionCount > max || DCList [i].GetComponent<tacScript>().escaped) {
 				GameObject cell = DCList [i];
 				DCList.RemoveAt (i);
 				ParticleSystem ps = Instantiate (apoptosisEffect);
@@ -225,7 +227,7 @@ public class managerScript : MonoBehaviour {
 	public void disaster(){
 		isTiming = true;
 		timer = 0f;
-		targetNumber = DCList.Count;
+		recoveryNumber = DCList.Count;
 		float removePercent = DCList.Count * (disasterRemove / 100f);
 
 		for (int i = 0; i < removePercent; i++) {
@@ -236,18 +238,40 @@ public class managerScript : MonoBehaviour {
 				ParticleSystem ps = Instantiate (apoptosisEffect);
 				ps.transform.position = droplet.transform.position;
 				Destroy (droplet);
-				Debug.Log ("ran");
 			}
 		}
+			
+
+
+
 	}
 
 	void timerUpdate(){
 		if(isTiming){
 			timer += Time.deltaTime;
+			if (DCList.Count > (recoveryNumber*0.9)) {
+				isTiming = false;
+		/*		using (System.IO.StreamWriter file = 
+					new System.IO.StreamWriter(@"C:\Users\Eric\Desktop\changeSensitivity.txt", true))
+				{
+
+					if (apoptosisSim) {
+						file.WriteLine (timer.ToString ());
+						Debug.Log (timer.ToString ());
+						if (sensitivitySlider.value > 40) {
+							//creationSlider.value += 0.1f;
+							sensitivitySlider.value -= 1;
+							Debug.Log ("try");
+							disaster ();
+						}
+					}
+
+				}
+
+
+			*/}
 		}
-		if (DCList.Count > (targetNumber*0.8)) {
-			isTiming = false;
-		}
+
 	}
 
 
